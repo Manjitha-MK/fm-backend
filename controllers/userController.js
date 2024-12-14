@@ -16,3 +16,11 @@ export function createUser(req,res){
     
 }
 
+export function getUser(req,res){
+    User.find().then((users)=>{
+        res.json({
+            users,
+        })
+    })
+}
+
