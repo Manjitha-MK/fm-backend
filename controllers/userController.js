@@ -32,12 +32,12 @@ export function getUser(req,res){
 
 export function loginUser(req,res){
     User.find({email : req.body.email}).then((users)=>{
-        if(req.body.email.length == 0){
+        if(users.length == 0){
             res.json({
                 message : "User not found"
             })
         }else{
-            const user = users[0]
+            const user = users=[0]
             const isPasswordCorrect = bcrypt.compareSync(req.body.password, user.password)
 
             if(isPasswordCorrect){
