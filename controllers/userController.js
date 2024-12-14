@@ -37,7 +37,7 @@ export function loginUser(req,res){
                 message : "User not found"
             })
         }else{
-            const user = users=[0]
+            const user = users[0]
             const isPasswordCorrect = bcrypt.compareSync(req.body.password, user.password)
 
             if(isPasswordCorrect){
