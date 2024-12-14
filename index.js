@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import userRouter from "./routers/userRouter.js";
 
 //...............connect database...........................//
-const mongoUrl = "mongodb+srv://admin:123@cluster0.ey2ao.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const mongoUrl = "mongodb+srv://admin:1234@cluster0.ey2ao.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose.connect(mongoUrl,{})
 

@@ -1,4 +1,4 @@
-import User from "../models/use.js";
+import User from "../models/user.js";
 
 
 export function createUser(req,res){
