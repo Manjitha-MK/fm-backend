@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import express from "express";
 import mongoose from "mongoose";
 import userRouter from "./routers/userRouter.js";
+import jwt from "jsonwebtoken";
 
 //...............connect database...........................//
 const mongoUrl = "mongodb+srv://admin:1234@cluster0.ey2ao.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -20,7 +21,18 @@ const app = express();
 app.use(bodyParser.json()); //middleware
 
 app.use((req,res,next)=>{
-  
+  const token = req.header("Authorization")?.replace("Bearer","")
+
+
+  if(token != null){
+    jwt.verify(token,"fm-secret-key-1234", (error,decoded)=>{
+       if(!error){
+        console.log(decoded)
+        req.user = decoded
+       }
+    })
+  }
+  next()
 })
 
 app.use("/api/users",userRouter)
