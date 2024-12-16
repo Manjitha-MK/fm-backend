@@ -19,6 +19,10 @@ const app = express();
 
 app.use(bodyParser.json()); //middleware
 
+app.use((req,res,next)=>{
+  
+})
+
 app.use("/api/users",userRouter)
 
 app.listen(3000, () => {
