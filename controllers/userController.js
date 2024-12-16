@@ -49,7 +49,7 @@ export function loginUser(req,res){
                     isBlocked : user.isBlocked,
                     type : user.type,
                     profilpic : user.profilpic
-                } , "fm-secret-key-1234")
+                } , process.env.SECRET_KEY)
 
                 res.json({
                     message : "User logged in",

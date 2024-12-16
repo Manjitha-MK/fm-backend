@@ -3,9 +3,11 @@ import express from "express";
 import mongoose from "mongoose";
 import userRouter from "./routers/userRouter.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 //...............connect database...........................//
-const mongoUrl = "mongodb+srv://admin:1234@cluster0.ey2ao.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const mongoUrl = process.env.MONGO_DB_URI;
 
 mongoose.connect(mongoUrl,{})
 
@@ -25,7 +27,7 @@ app.use((req,res,next)=>{
 
 
   if(token != null){
-    jwt.verify(token,"fm-secret-key-1234", (error,decoded)=>{
+    jwt.verify(token,process.env.SECRET_KEY, (error,decoded)=>{
        if(!error){
         console.log(decoded)
         req.user = decoded
