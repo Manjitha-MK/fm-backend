@@ -9,35 +9,34 @@ dotenv.config();
 //...............connect database...........................//
 const mongoUrl = process.env.MONGO_DB_URI;
 
-mongoose.connect(mongoUrl,{})
+mongoose.connect(mongoUrl, {});
 
 const connection = mongoose.connection;
 
-connection.once("open",()=>{
+connection.once("open", () => {
   console.log("Database connected");
-})
+});
 //.........................................................//
 
 const app = express();
 
 app.use(bodyParser.json()); //middleware
 
-app.use((req,res,next)=>{
-  const token = req.header("Authorization")?.replace("Bearer","")
+app.use((req, res, next) => {
+  const token = req.header("Authorization")?.replace("Bearer ", "");
 
-
-  if(token != null){
-    jwt.verify(token,process.env.SECRET_KEY, (error,decoded)=>{
-       if(!error){
-        console.log(decoded)
-        req.user = decoded
-       }
-    })
+  if (token != null) {
+    jwt.verify(token, process.env.SECRET_KEY, (error,decoded) => {
+      if (!error) {
+        req.user = decoded;
+      }
+    });
   }
-  next()
-})
+  next();
 
-app.use("/api/users",userRouter)
+});
+
+app.use("/api/users", userRouter);
 
 app.listen(3000, () => {
   console.log("server is running port 3000");
